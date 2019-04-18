@@ -14,7 +14,7 @@ URL: https://www.python.org/
 #  WARNING  When rebasing to a new Python version,
 #           remember to update the python3-docs package as well
 Version: %{pybasever}.8
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: Python
 
 
@@ -988,6 +988,9 @@ rm %{buildroot}%{_mandir}/man1/python3.1*
 rm %{buildroot}%{_libdir}/pkgconfig/python3.pc
 %endif
 
+# make man python3.6m work (#1612241)
+ln -s ./python%{pybasever}.1 %{buildroot}%{_mandir}/man1/python%{pybasever}m.1
+
 # ======================================================
 # Checks for packaging issues
 # ======================================================
@@ -1531,6 +1534,9 @@ CheckPython optimized
 # ======================================================
 
 %changelog
+* Wed Apr 17 2019 Patrik Kopkan <pkopkan@redhat.com> - 3.6.8-7
+- Makes man python3.6m show python3.6 man pages (#1612241)
+
 * Mon Feb 18 2019 Miro Hrončok <mhroncok@redhat.com> - 3.6.8-6
 - Reduced default build flags used to build extension modules
   https://fedoraproject.org/wiki/Changes/Python_Extension_Flags
